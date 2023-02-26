@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
-import Section from './Section';
-import Statistics from './Statistics';
-import FeedbackOptions from './FeedbackOptions';
+import Section from './Section/Section.jsx';
+import Statistics from './Statistics/Statistics.jsx';
+import FeedbackOptions from './FeedbackOptions/FeedbackOptions';
+import Notification from './Notification/Notification';
 
-const options = ['good', 'bad', 'neutral'];
 
+const options = ['good', 'bad', 'neutral']
 
-export class App extends Component {
+export default class App extends Component {
+
+  static propTypes = {}
+
     state = {
-      good: 0,
-      neutral: 0,
-      bad: 0,
+      good:0,
+      neutral:0,
+      bad:0,
     };
   
-    countTotalFeedback = () => {
+  countTotalFeedback = () => {
+      console.log("Inside cout feedback")
+    console.log(this.state)
       const { good, neutral, bad } = this.state;
       return good + bad + neutral;
     };
@@ -24,12 +30,22 @@ export class App extends Component {
       return totalFeedback ? Math.round((good / totalFeedback) * 100) : 0;
     };
   
-    handleFeedback = ({ target }) => {
-      const { feedback } = target.dataset;
-      this.setState(prevState => {
-        return { [feedback]: prevState[feedback] + 1 };
-      });
-    };
+  handleFeedback = ({ target }) => {
+    console.log(target)
+    console.log(target.dataset)
+
+    if (target.dataset.feedback === 'bad') {
+      this.state.bad += 1
+    } else if (target.dataset.feedback === 'good') {
+      this.state.good += 1
+    } else {
+      this.state.neutral += 1
+    }
+    const { Feedback } = this.state;
+    this.setState(prevState => {
+      return { [Feedback]: prevState[Feedback] + 1 };
+    });
+  };
   
     render() {
       const { good, neutral, bad } = this.state;
@@ -55,8 +71,8 @@ export class App extends Component {
           </Section>
         </>
       )
-    }
+  };
     
-  }
+  };
  
  

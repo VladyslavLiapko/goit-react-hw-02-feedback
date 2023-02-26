@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import styles from './Statistics.module.scss';
-import Notification from 'Notification';
+import styles from './Statistics';
+import Notification from '../Notification/Notification';
 
-export const Statistics = ({
+ const Statistics = ({
   good,
   neutral,
   bad,
@@ -33,3 +33,4 @@ Statistics.propTypes = {
   total: PropTypes.number.isRequired,
   positiveFeedbackPercentage: PropTypes.number.isRequired,
 };
+export default Statistics;
